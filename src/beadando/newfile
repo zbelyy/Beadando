@@ -1,0 +1,22 @@
+@Override
+	public boolean save() {
+            if(validate().isEmpty()){
+                    String sql = "INSERT INTO KAJA (kapcsolat_id,szemely_id) values(?, ?)";
+                    PreparedStatement save;
+                try {
+                    save = conn.prepareStatement(sql);
+                    save.setInt(1, this.kapcsolat_id);
+                    save.setInt(2, this.szemely_id);
+                    save.executeUpdate();
+                    LinkedList<gyermekModel> gyermekek = this.findAll("");
+                        gyermekModel gyermek = gyermekek.getLast();
+                        this.id = gyermek.getID();
+                    return true;
+                } catch (SQLException ex) {
+                    Logger.getLogger(gyermekModel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    //save.setLong(1, AzonositoGenerator.getAzonosito());
+                    return false;
+		}
+                return false;
+	}
