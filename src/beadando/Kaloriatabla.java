@@ -4,6 +4,7 @@
  */
 package beadando;
 
+import static beadando.Factory.kajalista;
 import beadando.Kaja;
 import java.awt.Panel;
 import java.sql.Connection;
@@ -12,6 +13,8 @@ import java.sql.SQLException;
 import java.time.Clock;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import machine.KaloriatablaDDD;
+import machine.KaloriatablaDDDImpl;
 
 /**
  *
@@ -218,11 +221,23 @@ public class Kaloriatabla extends javax.swing.JFrame {
 //        });
         //Kaja k = new Kaja();
         //System.out.println(k.getFeherje());
-           Factory.newKaja(30, "megnevezés", 100, 100, 100);
-           ArrayList<Kaja> kajak = Factory.getKajak();
-           for(Kaja kaja : kajak ){
-               System.out.println(kaja);
-           }
+          // Factory.newKaja(30, "megnevezés", 100, 100, 100);
+//           ArrayList<Kaja> kajalista = new ArrayList<>();
+//           KaloriatablaDDD dao = new KaloriatablaDDDImpl();
+//           kajalista = dao.getKajak();
+//           for(Kaja kaja : kajalista ){
+//               System.out.println(kaja.getNev());
+//           }
+           Kaja P1;
+           KaloriatablaDDD dao = new KaloriatablaDDDImpl();
+           P1 = dao.getKajabyazon(25);
+
+           Kaja P2 = new Kaja("jambor", 20,10,2);
+           P2= dao.saveKaja(P2);
+           
+           System.out.println(P2.toString());
+
+           
            
 //        for(Kaja item : k.getKajak() ){
 //            //System.out.println(item.toString());

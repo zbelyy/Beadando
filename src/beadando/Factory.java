@@ -20,9 +20,9 @@ public class Factory {
      * 
      * Léterhozza az új kaja objektumot
      */
-    public static void newKaja(int id, String Nev, int Kaloria, int Feherje, int Szenhidrat){
-        kajalista.add(new Kaja(id,Nev,Kaloria,Feherje,Szenhidrat));
-    }
+//    public static void newKaja(int id, String Nev, int Kaloria, int Feherje, int Szenhidrat){
+//        kajalista.add(new Kaja(id,Nev,Kaloria,Feherje,Szenhidrat));
+//    }
     
     public static void newKapcsolo(){
         

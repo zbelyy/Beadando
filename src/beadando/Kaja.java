@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,12 +29,14 @@ public class Kaja extends ConnectionHandler{
     protected int Szenhidrat;
     
     protected Connection conn = this.getConnection();
-    public Kaja(int id, String Nev, int Kaloria, int Feherje, int Szenhidrat) {
-        this.id = id;
+    public Kaja( String Nev, int Kaloria, int Feherje, int Szenhidrat) {
         this.Nev = Nev;
         this.Kaloria = Kaloria;
         this.Feherje = Feherje;
         this.Szenhidrat = Szenhidrat;
+    }
+
+    public Kaja() {
     }
     
     public int getId() {
@@ -78,30 +81,36 @@ public class Kaja extends ConnectionHandler{
 
     @Override
     public String toString() {
-        return "Kaja{" + "id=" + id + ", Nev=" + Nev + ", Kaloria=" + Kaloria + ", Feherje=" + Feherje + ", Szenhidrat=" + Szenhidrat + '}';
+        return "ID=" + id +"Nev=" + Nev + ", Kaloria=" + Kaloria + ", Feherje=" + Feherje + ", Szenhidrat=" + Szenhidrat;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Kaja other = (Kaja) obj;
+        if (!Objects.equals(this.Nev, other.Nev)) {
+            return false;
+        }
+        return true;
+    }
+
+    
     
     public void save(){
         String sql = "INSERT INTO kaja .......";
     }
     
-    public ArrayList<Kaja> getKajak(){
-        ArrayList<Kaja> kajalista = new ArrayList<>();
-        String SQLText = "select * from kaja";
-        String ret = "";
-        try{
-
-            Statement stmnt = conn.createStatement();
-            ResultSet rs = stmnt.executeQuery(SQLText);
-            while (rs.next()) { 
-                kajalista.add( new Kaja(rs.getInt("id"),rs.getString("Nev"),rs.getInt("Kaloria"), rs.getInt("Feherje"), rs.getInt("Szenhidrat")));
-            } 
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Kaja.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-        return kajalista;
-    }
+//    
     
 }
