@@ -49,12 +49,12 @@ public class Factory {
     /**
      * Az adatbázisba menti le a memóriában lévő adatokat.
      */
-    public static void saveKajak(){
-        for(Kaja item : kajalista){
-            item.save();
-        }
-        
-    }
+//    public static void saveKajak(){
+//        for(Kaja item : kajalista){
+//            item.save();
+//        }
+//        
+//    }
     
     /*public static ArrayList<Kapcsolo> getKapcsolok(){
         retrun null;

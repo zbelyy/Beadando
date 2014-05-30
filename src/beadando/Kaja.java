@@ -27,8 +27,18 @@ public class Kaja extends ConnectionHandler{
     protected int Kaloria;
     protected int Feherje;
     protected int Szenhidrat;
+
+    public Kaja(int id, String Nev, int Kaloria, int Feherje, int Szenhidrat) {
+        this.id = id;
+        this.Nev = Nev;
+        this.Kaloria = Kaloria;
+        this.Feherje = Feherje;
+        this.Szenhidrat = Szenhidrat;
+    }
+
+
     
-    protected Connection conn = this.getConnection();
+
     public Kaja( String Nev, int Kaloria, int Feherje, int Szenhidrat) {
         this.Nev = Nev;
         this.Kaloria = Kaloria;
@@ -104,13 +114,6 @@ public class Kaja extends ConnectionHandler{
         }
         return true;
     }
-
-    
-    
-    public void save(){
-        String sql = "INSERT INTO kaja .......";
-    }
-    
-//    
+       
     
 }

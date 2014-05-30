@@ -10,8 +10,10 @@ import java.awt.Panel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import machine.KaloriatablaDDD;
 import machine.KaloriatablaDDDImpl;
@@ -230,13 +232,17 @@ public class Kaloriatabla extends javax.swing.JFrame {
 //           }
            Kaja P1;
            KaloriatablaDDD dao = new KaloriatablaDDDImpl();
-           P1 = dao.getKajabyazon(25);
-
-           Kaja P2 = new Kaja("jambor", 20,10,2);
-           P2= dao.saveKaja(P2);
+           P1 = dao.getKajabyazon(9);
+           //String date = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime());
+           Kapcsolo kapcs = new Kapcsolo(P1,dao.getNapszak(1),2 );
            
-           System.out.println(P2.toString());
-
+           dao.setKajabyDate(kapcs);
+//           System.out.println(kapcs.getKaja().toString());
+//           Kaja P2 = new Kaja("jambor", 20,10,2);
+//           P2= dao.saveKaja(P2);
+//           
+//           System.out.println(P2.toString());
+            
            
            
 //        for(Kaja item : k.getKajak() ){

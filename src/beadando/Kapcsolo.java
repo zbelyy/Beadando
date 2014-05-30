@@ -8,6 +8,9 @@ package beadando;
 
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -16,17 +19,20 @@ import java.sql.Timestamp;
  */
 public class Kapcsolo {
     protected int id;
-    protected int userId;
-    protected int kajaId;
-    protected int napszakId;
-    protected Timestamp date;
+    protected Kaja kaja;
+    protected Napszak napszak;
+    protected float mennyiseg;
+    protected static String date = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime()); 
 
-    public Kapcsolo( int userId, int kajaId, int napszakId, String date) {
-        this.userId = userId;
-        this.kajaId = kajaId;
-        this.napszakId = napszakId;
-        String split[] = date.split("-");
-        this.date = new Timestamp(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]),0,0,0,0);
+    public Kapcsolo() {
+    }
+    
+
+    public Kapcsolo(Kaja kaja, Napszak napszak, float mennyiseg) {
+        this.kaja = kaja;
+        this.napszak = napszak;
+        this.mennyiseg = mennyiseg;
+
     }
     
     public int getId() {
@@ -37,36 +43,39 @@ public class Kapcsolo {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public Kaja getKaja() {
+        return kaja;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setKaja(Kaja kaja) {
+        this.kaja = kaja;
     }
 
-    public int getKajaId() {
-        return kajaId;
+    public Napszak getNapszak() {
+        return napszak;
     }
 
-    public void setKajaId(int kajaId) {
-        this.kajaId = kajaId;
+    public void setNapszak(Napszak napszak) {
+        this.napszak = napszak;
     }
 
-    public int getNapszakId() {
-        return napszakId;
+    public float getMennyiseg() {
+        return mennyiseg;
     }
 
-    public void setNapszakId(int napszakId) {
-        this.napszakId = napszakId;
+    public void setMennyiseg(float mennyiseg) {
+        this.mennyiseg = mennyiseg;
     }
 
-    public Timestamp getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+
+
+    @Override
+    public String toString() {
+        return "Kapcsolo{" + "id=" + id + ", kaja=" + kaja + ", napszak=" + napszak + ", date=" + date + '}';
     }
     
     

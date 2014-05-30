@@ -8,6 +8,7 @@ package machine;
 
 import beadando.Kaja;
 import beadando.Kapcsolo;
+import beadando.Napszak;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,15 @@ public interface KaloriatablaDDD {
     public Kaja saveKaja(Kaja kaja);
     
     /*felvesz egy kaját egy adott dátumra*/
-    public Kapcsolo setKajabyDate(Kaja kaja, Timestamp date);
+    public Kapcsolo setKajabyDate(Kapcsolo kapcsolo);
     
     /*visszadja az adott nap elfogyasztott kajákat*/
-    public List<Kapcsolo> getKajabyDate(Timestamp date);
+    public ArrayList<Kapcsolo> getKajabyDate(String date);
+    
+    /*visszadja a napszakot id alapján*/
+    public Napszak getNapszak(int id);
+    
+    /*listázza a napszakokat*/
+    public ArrayList<Napszak> load();
     
 }

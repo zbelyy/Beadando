@@ -9,6 +9,7 @@ package machine;
 import beadando.ConnectionHandler;
 import beadando.Kaja;
 import beadando.Kapcsolo;
+import beadando.Napszak;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +33,6 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
     public ArrayList<Kaja> getKajak(){
         ArrayList<Kaja> kajalista = new ArrayList<>();
         String SQLText = "select * from kaja";
-        String ret = "";
         try{
 
             Statement stmnt = conn.createStatement();
@@ -55,7 +55,7 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(SQLText);
             rs.next();
-            return new Kaja(rs.getString("NEV"), rs.getInt("KALORIA"), rs.getInt("FEHERJE"), rs.getInt("SZENHIDRAT"));
+            return new Kaja(rs.getInt("ID"),rs.getString("NEV"), rs.getInt("KALORIA"), rs.getInt("FEHERJE"), rs.getInt("SZENHIDRAT"));
         }catch(SQLException e){
             Logger.getLogger(Kaja.class.getName()).log(Level.SEVERE, null, e);
             return null;
@@ -93,13 +93,44 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
     }
 
     @Override
-    public Kapcsolo setKajabyDate(Kaja kaja, Timestamp date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Kapcsolo setKajabyDate(Kapcsolo kapcsolo) {
+        String SQLText = String.format("insert into kapcsolo (NAPSZAKID,KAJAID,MENNYISEG,DATUM) values (?,?,?,?)");
+        PreparedStatement save;
+        Statement load;
+        try{
+            save = conn.prepareStatement(SQLText);
+            save.setInt(1, kapcsolo.getNapszak().getId());
+            save.setInt(2, kapcsolo.getKaja().getId());
+            save.setFloat(3, kapcsolo.getMennyiseg());
+            save.setString(4, kapcsolo.getDate());
+            save.executeUpdate();
+            String sql = String.format("select id from kapcsolo where rownum <= 1 order by id desc");
+                        load = conn.createStatement();
+                        ResultSet rs = load.executeQuery(sql);
+                        rs.next();
+                        kapcsolo.setId(rs.getInt("ID"));
+            return kapcsolo;
+        }catch (SQLException e){
+            Logger.getLogger(Kapcsolo.class.getName()).log(Level.SEVERE, null, e);
+            return null;
+        }
     }
 
     @Override
-    public List<Kapcsolo> getKajabyDate(Timestamp date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Kapcsolo> getKajabyDate(String date) {
+        ArrayList kajak = new ArrayList();
+        Kapcsolo kapcs = new Kapcsolo();
+        String SQLText = String.format("select * from kapcsolo where DATUM='%s'", date);
+        try{
+            Statement stmnt = conn.createStatement();
+            ResultSet rs = stmnt.executeQuery(SQLText);
+            while(rs.next()){
+                kajak.add(new Kapcsolo(rs.kapcs.get));
+            }
+        }catch(SQLException e){
+            Logger.getLogger(Kapcsolo.class.getName()).log(Level.SEVERE, null, e);            
+        }
+        return null;
     }
 
     @Override
@@ -109,6 +140,38 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public Napszak getNapszak(int id) {
+        String SQLText = String.format("select * from napszak where id=%d", id);
+        try{
+            Statement stmnt = conn.createStatement();
+            ResultSet rs = stmnt.executeQuery(SQLText);
+            rs.next();
+            return new Napszak(rs.getInt("ID"), rs.getString("NAPSZAK"));
+        }catch(SQLException e){
+            Logger.getLogger(Napszak.class.getName()).log(Level.SEVERE, null, e);
+            
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Napszak> load() {
+                ArrayList<Napszak> napszakok = new ArrayList<>();
+        String SQLText = String.format("select * from napszak");
+        try{
+            Statement stmnt = conn.createStatement();
+            ResultSet rs = stmnt.executeQuery(SQLText);
+            while(rs.next());{
+                napszakok.add(new Napszak(rs.getInt("ID"), rs.getString("NAPSZAK")));
+        }
+        }catch(SQLException e){
+            Logger.getLogger(Napszak.class.getName()).log(Level.SEVERE, null, e);
+            
+        }
+        return null;
     }
     
 }

@@ -6,66 +6,41 @@
 
 package beadando;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author zbocskay
  */
 public class Napszak {
-    protected int id;
-    protected String napSzak;
 
-    public Napszak(int id, String napSzak) {
+        protected int id;
+        protected String napszak;
+
+    public Napszak(int id, String napszak) {
         this.id = id;
-        this.napSzak = napSzak;
+        this.napszak = napszak;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNapSzak() {
-        return napSzak;
-    }
-
-    public void setNapSzak(String napSzak) {
-        this.napSzak = napSzak;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Napszak other = (Napszak) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.napSzak, other.napSzak)) {
-            return false;
-        }
-        return true;
+    public String getNapszak() {
+        return napszak;
     }
 
     @Override
     public String toString() {
-        return "Napszak =" + napSzak;
+        return "Napszak{" +  "id=" + id + ", napszak=" + napszak + '}';
     }
-    
-    
+
     
 }
