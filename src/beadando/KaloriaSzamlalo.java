@@ -6,7 +6,9 @@
 
 package beadando;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Container;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.beans.binding.Bindings;
@@ -45,6 +47,17 @@ public class KaloriaSzamlalo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        nevText = new javax.swing.JFrame();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        nevSaveText = new javax.swing.JTextField();
+        kaloriaText = new javax.swing.JTextField();
+        feherjeText = new javax.swing.JTextField();
+        szenhidratText = new javax.swing.JTextField();
+        saveKaja = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
         reggel = new javax.swing.JLabel();
         del = new javax.swing.JLabel();
         este = new javax.swing.JLabel();
@@ -78,8 +91,87 @@ public class KaloriaSzamlalo extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         kajaLista = new javax.swing.JTextArea();
 
+        nevText.setTitle("Új kaja felvétele");
+        nevText.setResizable(false);
+
+        jLabel10.setText("Név");
+
+        jLabel11.setText("Kalória");
+
+        jLabel12.setText("Fehérje");
+
+        jLabel13.setText("Szénhidrát");
+
+        saveKaja.setText("Mentés");
+        saveKaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveKajaActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("100g - ban");
+
+        javax.swing.GroupLayout nevTextLayout = new javax.swing.GroupLayout(nevText.getContentPane());
+        nevText.getContentPane().setLayout(nevTextLayout);
+        nevTextLayout.setHorizontalGroup(
+            nevTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nevTextLayout.createSequentialGroup()
+                .addGroup(nevTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nevTextLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveKaja, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nevTextLayout.createSequentialGroup()
+                        .addGroup(nevTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(nevTextLayout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE))
+                            .addGroup(nevTextLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(nevSaveText)
+                                .addGap(18, 18, 18)))
+                        .addGroup(nevTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(nevTextLayout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(97, 97, 97))
+                            .addGroup(nevTextLayout.createSequentialGroup()
+                                .addComponent(kaloriaText, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(feherjeText, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(szenhidratText, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        nevTextLayout.setVerticalGroup(
+            nevTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nevTextLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(nevTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(nevTextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(szenhidratText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(feherjeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kaloriaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nevSaveText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(18, 18, 18)
+                .addComponent(saveKaja)
+                .addGap(50, 50, 50))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Kalóriaszámláló");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         reggel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -142,6 +234,11 @@ public class KaloriaSzamlalo extends javax.swing.JFrame {
         jLabel8.setText("Súly:");
 
         addKaja.setText("Kajafelvétel");
+        addKaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addKajaActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Dátum:");
 
@@ -294,19 +391,19 @@ public class KaloriaSzamlalo extends javax.swing.JFrame {
         KaloriatablaDDD dao = new KaloriatablaDDDImpl();
         val = dao.getKajak();
         for ( Kaja kaj:val){
-            if( kaj.getNev().equals((String) jList1.getSelectedValue()) ){
+            if( kaj.getNev().equals((String) jList1.getSelectedValue()) && tryParse(grammReggelField.getText()) > 0 ){
                 Kapcsolo kapcs;
                 kapcs = new Kapcsolo(dao.getKajabyazon(kaj.getId(),tryParse(grammReggelField.getText()) ), dao.getNapszak(1), tryParse(grammReggelField.getText()));
                 System.out.println(kapcs.toString());
                 dao.setKajabyDate(kapcs);
             }
-            if( kaj.getNev().equals((String) jList2.getSelectedValue()) ){
+            if( kaj.getNev().equals((String) jList2.getSelectedValue()) && tryParse(grammDelField.getText()) > 0 ){
                 Kapcsolo kapcs;
                 kapcs = new Kapcsolo(dao.getKajabyazon(kaj.getId(),tryParse(grammDelField.getText()) ), dao.getNapszak(2), tryParse(grammDelField.getText()));
                 System.out.println(kapcs.toString());
                 dao.setKajabyDate(kapcs);
             }
-            if( kaj.getNev().equals((String) jList3.getSelectedValue()) ){
+            if( kaj.getNev().equals((String) jList3.getSelectedValue()) && tryParse(grammEsteField.getText()) > 0){
                 Kapcsolo kapcs;
                 kapcs = new Kapcsolo(dao.getKajabyazon(kaj.getId(),tryParse(grammEsteField.getText()) ), dao.getNapszak(3), tryParse(grammEsteField.getText()));
                 System.out.println(kapcs.toString());
@@ -351,14 +448,36 @@ public class KaloriaSzamlalo extends javax.swing.JFrame {
 
     private void listKajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listKajaActionPerformed
         KaloriatablaDDD dao = new KaloriatablaDDDImpl();
-        ArrayList<Kapcsolo> kajak = dao.getKajabyDate(dateInput.getText());
+        String kajak = dao.getKajabyDate(dateInput.getText());
         
         kajaLista.setEditable(false);
-
-        kajaLista.setText(Integer.toString(kajak.size()));
-        kajaLista.setText(kajak.toString());
+        kajaLista.setText(kajak);
 
     }//GEN-LAST:event_listKajaActionPerformed
+
+    private void addKajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addKajaActionPerformed
+ //       JFrame frames = new JFrame("Button Sample");
+        nevText.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        nevText.setSize(500, 150);
+        nevText.setResizable(false);
+        nevText.setVisible(true);
+        nevText.setLocationRelativeTo(null);
+
+
+        
+    }//GEN-LAST:event_addKajaActionPerformed
+
+    private void saveKajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveKajaActionPerformed
+        KaloriatablaDDD dao = new KaloriatablaDDDImpl();
+        Kaja kaj = new Kaja(nevSaveText.getText(), tryParse(kaloriaText.getText()),tryParse(feherjeText.getText()), tryParse(szenhidratText.getText()));
+        dao.saveKaja(kaj);
+        JOptionPane.showMessageDialog(frame, "Lementve az adatbázisba!", "Mentés",JOptionPane.INFORMATION_MESSAGE);
+        nevSaveText.setText("");
+        kaloriaText.setText("");
+        feherjeText.setText("");
+        szenhidratText.setText("");
+    }//GEN-LAST:event_saveKajaActionPerformed
 public static Integer tryParse(String text) {
   try {
       if(text.isEmpty()){
@@ -418,10 +537,16 @@ public static Integer tryParse(String text) {
     private javax.swing.JLabel del;
     private javax.swing.JLabel este;
     private javax.swing.JTextField feherjeCountOutput;
+    private javax.swing.JTextField feherjeText;
     private javax.swing.JTextField grammDelField;
     private javax.swing.JTextField grammEsteField;
     private javax.swing.JTextField grammReggelField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -439,10 +564,15 @@ public static Integer tryParse(String text) {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea kajaLista;
     private javax.swing.JTextField kaloriaCountOutput;
+    private javax.swing.JTextField kaloriaText;
     private javax.swing.JButton listKaja;
+    private javax.swing.JTextField nevSaveText;
+    private javax.swing.JFrame nevText;
     private javax.swing.JLabel reggel;
     private javax.swing.JButton saveButtonCounted;
+    private javax.swing.JButton saveKaja;
     private javax.swing.JTextField sulyCountOutput;
     private javax.swing.JTextField szenhidratCoutnOutput;
+    private javax.swing.JTextField szenhidratText;
     // End of variables declaration//GEN-END:variables
 }

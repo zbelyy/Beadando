@@ -42,7 +42,7 @@ public class Napszak {
 
     @Override
     public String toString() {
-        return "Napszak= " + napszak;
+        return napszak;
     }
 
     

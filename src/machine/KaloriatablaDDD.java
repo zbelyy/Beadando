@@ -34,7 +34,7 @@ public interface KaloriatablaDDD {
     public Kapcsolo setKajabyDate(Kapcsolo kapcsolo);
     
     /*visszadja az adott nap elfogyasztott kajákat*/
-    public ArrayList<Kapcsolo> getKajabyDate(String date);
+    public String getKajabyDate(String date);
     
     /*visszadja a napszakot id alapján*/
     public Napszak getNapszak(int id);

@@ -10,9 +10,11 @@ import beadando.ConnectionHandler;
 import beadando.Kaja;
 import beadando.Kapcsolo;
 import beadando.Napszak;
+import java.lang.Exception;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -20,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.lang.Exception;
 
 /**
  *
@@ -116,21 +117,45 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
             return null;
         }
     }
+        public String formatString(String s) {
+        int limit = 20;
+        StringBuilder sb = new StringBuilder();
+        sb.append(s);
 
+        if (sb.length() > limit - 1) {
+            // ha nem fér ki 
+            sb.setLength(limit - 4);
+            sb.append("... ");
+            return sb.toString();
+        } else {
+            // ha kifér 
+            while (sb.length() < limit) {
+                sb.append(" ");
+            }
+            return sb.toString();
+        }
+
+    }
+    
+
+
+    
+        
     @Override
-    public ArrayList<Kapcsolo> getKajabyDate(String date) {
+    public String getKajabyDate(String date) {
         ArrayList kajak = new ArrayList();
         String SQLText = String.format("select * from kapcsolo where DATUM='%s'", date);
-        
         try{
+            String szoveg;
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(SQLText);
-            
+            szoveg = String.format("Kaja név\tKalória\tFehérje\tSzénhidrát\tNapszak\tMennyiség\tDátum\n");
             
             while(rs.next()){
-                    kajak.add(new Kapcsolo(getKajabyazon(rs.getInt("KAJAID"), rs.getInt("MENNYISEG")), getNapszak(rs.getInt("NAPSZAKID")) , rs.getInt("MENNYISEG")));
+                    Kaja kaja = getKajabyazon(rs.getInt("KAJAID"), rs.getInt("MENNYISEG"));
+                    szoveg += kaja.getNev()+ "\t"+kaja.getKaloria()+"\t"+kaja.getFeherje()+"\t"+kaja.getSzenhidrat()+"\t"+getNapszak(rs.getInt("NAPSZAKID"))+"\t"+rs.getInt("MENNYISEG")+"\t"+date+"\n";
             }
-            return kajak;
+            return szoveg;
         }catch(SQLException e){
             Logger.getLogger(Kapcsolo.class.getName()).log(Level.SEVERE, null, e);            
         }
