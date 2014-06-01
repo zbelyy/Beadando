@@ -474,13 +474,17 @@ public class KaloriaSzamlalo extends javax.swing.JFrame {
 
     private void saveKajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveKajaActionPerformed
         KaloriatablaDDD dao = new KaloriatablaDDDImpl();
-        Kaja kaj = new Kaja(nevSaveText.getText(), tryParse(kaloriaText.getText()),tryParse(feherjeText.getText()), tryParse(szenhidratText.getText()));
+        Kaja kaj = new Kaja(nevSaveText.getText(), tryParseF(kaloriaText.getText()),tryParseF(feherjeText.getText()), tryParseF(szenhidratText.getText()));
+        if(!dao.letezik(kaj)){
         dao.saveKaja(kaj);
         JOptionPane.showMessageDialog(frame, "Lementve az adatbázisba!", "Mentés",JOptionPane.INFORMATION_MESSAGE);
         nevSaveText.setText("");
         kaloriaText.setText("");
         feherjeText.setText("");
         szenhidratText.setText("");
+        }else{
+            JOptionPane.showMessageDialog(frame, "Már létezik ilyen kaja", "Hiba:  létező kaja",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_saveKajaActionPerformed
 public static Integer tryParse(String text) {
   try {
@@ -493,7 +497,17 @@ public static Integer tryParse(String text) {
       JOptionPane.showMessageDialog(frame, "Hibás érték, adjon meg egy számot!", "Hiba",JOptionPane.ERROR_MESSAGE); 
     return null;}
   }
-
+public static Float tryParseF(String text) {
+  try {
+      if(text.isEmpty()){
+          return 0.0f;
+      }else
+    return new Float(text);
+  } 
+  catch (NumberFormatException e) {
+      JOptionPane.showMessageDialog(frame, "Hibás érték, adjon meg egy számot!", "Hiba",JOptionPane.ERROR_MESSAGE); 
+    return null;}
+  }
     /**
      * @param args the command line arguments
      */
