@@ -29,6 +29,9 @@ public class Napszak {
         this.napszak = napszak;
     }
 
+
+
+
     public int getId() {
         return id;
     }
@@ -39,7 +42,7 @@ public class Napszak {
 
     @Override
     public String toString() {
-        return "Napszak{" +  "id=" + id + ", napszak=" + napszak + '}';
+        return "Napszak= " + napszak;
     }
 
     

@@ -25,7 +25,7 @@ public interface KaloriatablaDDD {
     public ArrayList<Kaja> getKajak();
     
     /*vissza adja a kaját azonosító alapján*/
-    public Kaja getKajabyazon(int azon);
+    public Kaja getKajabyazon(int azon, int x);
     
     /*felvesz egy új kaját az adatbázisba*/
     public Kaja saveKaja(Kaja kaja);

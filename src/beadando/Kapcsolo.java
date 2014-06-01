@@ -21,14 +21,14 @@ public class Kapcsolo {
     protected int id;
     protected Kaja kaja;
     protected Napszak napszak;
-    protected float mennyiseg;
+    protected int mennyiseg;
     protected static String date = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime()); 
 
     public Kapcsolo() {
     }
     
 
-    public Kapcsolo(Kaja kaja, Napszak napszak, float mennyiseg) {
+    public Kapcsolo(Kaja kaja, Napszak napszak, int mennyiseg) {
         this.kaja = kaja;
         this.napszak = napszak;
         this.mennyiseg = mennyiseg;
@@ -59,11 +59,11 @@ public class Kapcsolo {
         this.napszak = napszak;
     }
 
-    public float getMennyiseg() {
+    public int getMennyiseg() {
         return mennyiseg;
     }
 
-    public void setMennyiseg(float mennyiseg) {
+    public void setMennyiseg(int mennyiseg) {
         this.mennyiseg = mennyiseg;
     }
 
@@ -75,7 +75,7 @@ public class Kapcsolo {
 
     @Override
     public String toString() {
-        return "Kapcsolo{" + "id=" + id + ", kaja=" + kaja + ", napszak=" + napszak + ", date=" + date + '}';
+        return kaja + "" + napszak + " Mennyiseg= " +mennyiseg+ ", dátum=" + date + "\n";
     }
     
     

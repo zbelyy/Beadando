@@ -32,13 +32,13 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
     @Override
     public ArrayList<Kaja> getKajak(){
         ArrayList<Kaja> kajalista = new ArrayList<>();
-        String SQLText = "select * from kaja";
+        String SQLText = "select * from kaja order by NLSSORT(lower(NEV), 'NLS_SORT=west_european')";
         try{
 
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(SQLText);
             while (rs.next()) { 
-                kajalista.add( new Kaja(rs.getString("Nev"),rs.getInt("Kaloria"), rs.getInt("Feherje"), rs.getInt("Szenhidrat")));
+                kajalista.add( new Kaja(rs.getInt("ID"),rs.getString("Nev"),rs.getFloat("Kaloria"), rs.getFloat("Feherje"), rs.getFloat("Szenhidrat")));
             } 
 
         } catch (SQLException ex) {
@@ -49,13 +49,13 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
     }
     
     @Override
-    public Kaja getKajabyazon(int azon) {
+    public Kaja getKajabyazon(int azon, int x) {
         String SQLText = String.format("select * from kaja where id=%d", azon);
         try{
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(SQLText);
             rs.next();
-            return new Kaja(rs.getInt("ID"),rs.getString("NEV"), rs.getInt("KALORIA"), rs.getInt("FEHERJE"), rs.getInt("SZENHIDRAT"));
+            return new Kaja(rs.getInt("ID"),rs.getString("NEV"), rs.getFloat("KALORIA")*x/100, rs.getFloat("FEHERJE")*x/100, rs.getFloat("SZENHIDRAT")*x/100);
         }catch(SQLException e){
             Logger.getLogger(Kaja.class.getName()).log(Level.SEVERE, null, e);
             return null;
@@ -71,9 +71,9 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
                    try{
                         save = conn.prepareStatement(SQLText);
                         save.setString(1, kaja.getNev());
-                        save.setInt(2, kaja.getKaloria());
-                        save.setInt(3, kaja.getFeherje());
-                        save.setInt(4, kaja.getSzenhidrat());
+                        save.setFloat(2, kaja.getKaloria());
+                        save.setFloat(3, kaja.getFeherje());
+                        save.setFloat(4, kaja.getSzenhidrat());
                         save.executeUpdate();
                         String sql = String.format("select id from kaja where rownum <= 1 order by id desc");
                         load = conn.createStatement();
@@ -98,6 +98,7 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
         PreparedStatement save;
         Statement load;
         try{
+            if(kapcsolo.getMennyiseg() != 0){
             save = conn.prepareStatement(SQLText);
             save.setInt(1, kapcsolo.getNapszak().getId());
             save.setInt(2, kapcsolo.getKaja().getId());
@@ -109,7 +110,7 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
                         ResultSet rs = load.executeQuery(sql);
                         rs.next();
                         kapcsolo.setId(rs.getInt("ID"));
-            return kapcsolo;
+            }return kapcsolo;
         }catch (SQLException e){
             Logger.getLogger(Kapcsolo.class.getName()).log(Level.SEVERE, null, e);
             return null;
@@ -119,14 +120,17 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
     @Override
     public ArrayList<Kapcsolo> getKajabyDate(String date) {
         ArrayList kajak = new ArrayList();
-        Kapcsolo kapcs = new Kapcsolo();
         String SQLText = String.format("select * from kapcsolo where DATUM='%s'", date);
+        
         try{
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(SQLText);
+            
+            
             while(rs.next()){
-                kajak.add(new Kapcsolo(rs.kapcs.get));
+                    kajak.add(new Kapcsolo(getKajabyazon(rs.getInt("KAJAID"), rs.getInt("MENNYISEG")), getNapszak(rs.getInt("NAPSZAKID")) , rs.getInt("MENNYISEG")));
             }
+            return kajak;
         }catch(SQLException e){
             Logger.getLogger(Kapcsolo.class.getName()).log(Level.SEVERE, null, e);            
         }
@@ -159,19 +163,19 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
 
     @Override
     public ArrayList<Napszak> load() {
-                ArrayList<Napszak> napszakok = new ArrayList<>();
+        ArrayList<Napszak> napszakok = new ArrayList<>();
         String SQLText = String.format("select * from napszak");
         try{
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(SQLText);
-            while(rs.next());{
+            while(rs.next()){
                 napszakok.add(new Napszak(rs.getInt("ID"), rs.getString("NAPSZAK")));
-        }
+        }return napszakok;
         }catch(SQLException e){
             Logger.getLogger(Napszak.class.getName()).log(Level.SEVERE, null, e);
-            
+                    return null;
         }
-        return null;
+
     }
     
 }

@@ -24,11 +24,11 @@ public class Kaja extends ConnectionHandler{
     
     protected int id;
     protected String Nev;
-    protected int Kaloria;
-    protected int Feherje;
-    protected int Szenhidrat;
+    protected float Kaloria;
+    protected float Feherje;
+    protected float Szenhidrat;
 
-    public Kaja(int id, String Nev, int Kaloria, int Feherje, int Szenhidrat) {
+    public Kaja(int id, String Nev, float Kaloria, float Feherje, float Szenhidrat) {
         this.id = id;
         this.Nev = Nev;
         this.Kaloria = Kaloria;
@@ -36,10 +36,14 @@ public class Kaja extends ConnectionHandler{
         this.Szenhidrat = Szenhidrat;
     }
 
+    public Kaja(int id) {
+        this.id = id;
+    }
+
 
     
 
-    public Kaja( String Nev, int Kaloria, int Feherje, int Szenhidrat) {
+    public Kaja( String Nev, float Kaloria, float Feherje, float Szenhidrat) {
         this.Nev = Nev;
         this.Kaloria = Kaloria;
         this.Feherje = Feherje;
@@ -65,33 +69,33 @@ public class Kaja extends ConnectionHandler{
         this.Nev = Nev;
     }
 
-    public int getKaloria() {
+    public float getKaloria() {
         return Kaloria;
     }
 
-    public void setKaloria(int Kaloria) {
+    public void setKaloria(float Kaloria) {
         this.Kaloria = Kaloria;
     }
 
-    public int getFeherje() {
+    public float getFeherje() {
         return Feherje;
     }
 
-    public void setFeherje(int Feherje) {
+    public void setFeherje(float Feherje) {
         this.Feherje = Feherje;
     }
 
-    public int getSzenhidrat() {
+    public float getSzenhidrat() {
         return Szenhidrat;
     }
 
-    public void setSzenhidrat(int Szenhidrat) {
+    public void setSzenhidrat(float Szenhidrat) {
         this.Szenhidrat = Szenhidrat;
     }
 
     @Override
     public String toString() {
-        return "ID=" + id +"Nev=" + Nev + ", Kaloria=" + Kaloria + ", Feherje=" + Feherje + ", Szenhidrat=" + Szenhidrat;
+        return "Név= " + Nev + ", Kalória=" + Kaloria + ", Fehérje=" + Feherje + ", Szénhidrat=" + Szenhidrat + ", ";
     }
 
     @Override
