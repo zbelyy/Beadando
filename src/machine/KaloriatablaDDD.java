@@ -21,6 +21,10 @@ public interface KaloriatablaDDD {
     
     /*megvizsgálja, hogy létezik e már a kaja*/
     public boolean letezik(Kaja kaja);
+    
+    /* csekkolja, hogy van e a megadott dátum alatt bejegyzés*/
+    public boolean vane(String s);
+    
     /*visszaadja az összes kaját*/
     public ArrayList<Kaja> getKajak();
     

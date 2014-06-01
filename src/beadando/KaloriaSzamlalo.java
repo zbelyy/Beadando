@@ -448,10 +448,14 @@ public class KaloriaSzamlalo extends javax.swing.JFrame {
 
     private void listKajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listKajaActionPerformed
         KaloriatablaDDD dao = new KaloriatablaDDDImpl();
+        if(dao.vane(dateInput.getText())){
         String kajak = dao.getKajabyDate(dateInput.getText());
-        
         kajaLista.setEditable(false);
         kajaLista.setText(kajak);
+        }else{
+            JOptionPane.showMessageDialog(frame, "Hibás érték (fromátum: yyyy.mm.dd) vagy a dátom nem létezik az adatbázisban", "Hiba",JOptionPane.ERROR_MESSAGE);
+        }
+
 
     }//GEN-LAST:event_listKajaActionPerformed
 

@@ -149,11 +149,12 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
             String szoveg;
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(SQLText);
-            szoveg = String.format("Kaja név\tKalória\tFehérje\tSzénhidrát\tNapszak\tMennyiség\tDátum\n");
+            szoveg = String.format("Kaja név\t\tKalória\tFehérje\tSzénhidrát Napszak Mennyiség Dátum\n");
             
             while(rs.next()){
                     Kaja kaja = getKajabyazon(rs.getInt("KAJAID"), rs.getInt("MENNYISEG"));
-                    szoveg += kaja.getNev()+ "\t"+kaja.getKaloria()+"\t"+kaja.getFeherje()+"\t"+kaja.getSzenhidrat()+"\t"+getNapszak(rs.getInt("NAPSZAKID"))+"\t"+rs.getInt("MENNYISEG")+"\t"+date+"\n";
+                    szoveg += String.format("%-23s %-7s %-7s %-10s %-7s %-9s %-10s %n", kaja.getNev(), kaja.getKaloria(), kaja.getFeherje(), kaja.getSzenhidrat(), getNapszak(rs.getInt("NAPSZAKID")),rs.getInt("MENNYISEG"), date );
+         //           szoveg += kaja.getNev()+ "\t\t"+kaja.getKaloria()+"\t"+kaja.getFeherje()+"\t"+kaja.getSzenhidrat()+"\t"+getNapszak(rs.getInt("NAPSZAKID"))+"\t"+rs.getInt("MENNYISEG")+"\t"+date+"\n";
             }
             return szoveg;
         }catch(SQLException e){
@@ -202,5 +203,23 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
         }
 
     }
-    
+
+    @Override
+    public boolean vane(String s) {
+        String SQLText = String.format("select DATUM from kapcsolo");
+        try{
+            Statement stmnt = conn.createStatement();
+            ResultSet rs = stmnt.executeQuery(SQLText);
+
+            while(rs.next()){
+                if(rs.getString("DATUM").equals(s))
+                return true;
+            }
+        }catch(SQLException e){
+            Logger.getLogger(Kapcsolo.class.getName()).log(Level.SEVERE, null, e);
+                    return false;
+    }return false;
+        }
+        
+      
 }
