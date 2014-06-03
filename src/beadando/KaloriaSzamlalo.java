@@ -490,8 +490,11 @@ public static Integer tryParse(String text) {
   try {
       if(text.isEmpty()){
           return 0;
+      }else if (Integer.parseInt(text) < 0){
+          JOptionPane.showMessageDialog(frame, "Hibás érték, adjon meg egy számot!", "Hiba",JOptionPane.ERROR_MESSAGE);
+            return null;
       }else
-    return new Integer(text);
+          return new Integer(text);
   } 
   catch (NumberFormatException e) {
       JOptionPane.showMessageDialog(frame, "Hibás érték, adjon meg egy számot!", "Hiba",JOptionPane.ERROR_MESSAGE); 

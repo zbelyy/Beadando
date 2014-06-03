@@ -42,8 +42,5 @@ public interface KaloriatablaDDD {
     
     /*visszadja a napszakot id alapján*/
     public Napszak getNapszak(int id);
-    
-    /*listázza a napszakokat*/
-    public ArrayList<Napszak> load();
-    
+        
 }

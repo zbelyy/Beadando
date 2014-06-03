@@ -144,7 +144,7 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
     @Override
     public String getKajabyDate(String date) {
         ArrayList kajak = new ArrayList();
-        String SQLText = String.format("select * from kapcsolo where DATUM='%s'", date);
+        String SQLText = String.format("select * from kapcsolo where DATUM='%s' order by NAPSZAKID", date);
         try{
             String szoveg;
             Statement stmnt = conn.createStatement();
@@ -185,23 +185,6 @@ public class KaloriatablaDDDImpl extends ConnectionHandler implements Kaloriatab
             
         }
         return null;
-    }
-
-    @Override
-    public ArrayList<Napszak> load() {
-        ArrayList<Napszak> napszakok = new ArrayList<>();
-        String SQLText = String.format("select * from napszak");
-        try{
-            Statement stmnt = conn.createStatement();
-            ResultSet rs = stmnt.executeQuery(SQLText);
-            while(rs.next()){
-                napszakok.add(new Napszak(rs.getInt("ID"), rs.getString("NAPSZAK")));
-        }return napszakok;
-        }catch(SQLException e){
-            Logger.getLogger(Napszak.class.getName()).log(Level.SEVERE, null, e);
-                    return null;
-        }
-
     }
 
     @Override
